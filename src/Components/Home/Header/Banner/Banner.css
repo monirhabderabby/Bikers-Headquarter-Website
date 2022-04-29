@@ -1,0 +1,38 @@
+.banner{
+    height: calc(100vh - 80px);
+    width: 100%;
+}
+.cs-banner-content{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: left;
+}
+.cs-banner-details{
+    margin-bottom: 30px;
+}
+.cs-banner-title{
+    font-size: 45px;
+    font-weight: 900;
+    color: black
+}
+.inventory-btn{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1fa1da;
+    background-color: rgba(255, 255, 255, 0.618);
+    border: 2px solid #1fa1da;
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    transition: 0.7s;
+}
+.inventory-btn:hover{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: white;
+    color: #1fa1da;
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
