@@ -5,6 +5,7 @@
 .cs-banner-content{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: left;
+    padding: 30px;
 }
 .cs-banner-details{
     margin-bottom: 30px;
@@ -35,4 +36,7 @@
     padding: 12px 20px;
     border-radius: 4px;
     margin-top: 20px;
+}
+.banner-img{
+    padding: 30px;
 }
