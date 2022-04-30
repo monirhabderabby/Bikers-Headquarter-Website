@@ -15,7 +15,9 @@ const Navbar = () => {
       <div class="navbar-nav ms-auto mb-2 mb-lg-0">
         <NavLink to="/" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Home</NavLink>
         <NavLink to="/allinventory" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Inventory</NavLink>
+        <NavLink to="/my-items" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>My Items</NavLink>
         <NavLink to="/login" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>Login</NavLink>
+        
       </div>
       
     </div>
