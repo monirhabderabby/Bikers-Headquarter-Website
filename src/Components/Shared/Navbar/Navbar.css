@@ -13,14 +13,14 @@
     background-color: white;
     color: #1da1fa;
     text-decoration: none;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
     padding: 5px 10px;
     border-radius: 4px;
 }
 .unactive-link{
     color: rgba(255, 255, 255, 0.763);
     text-decoration: none;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
     padding: 5px 10px;
 }
 .active-link:hover, .unactive-link:hover{

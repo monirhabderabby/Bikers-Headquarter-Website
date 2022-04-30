@@ -13,7 +13,7 @@ const Banner = () => {
                 <Link to="/allinventory" className='inventory-btn mt-2'>Go to Inventory</Link>
             </div>
             <div className='mt-4 banner-img'>
-                <img className='img-fluid' src={banner} alt="" />
+                <img className='img-fluid d-none d-lg-flex' src={banner} alt="" />
             </div>
         </div>
     );
