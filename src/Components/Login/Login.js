@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css'
 import google from '../Assets/logo/google.svg'
 import Navbar from '../Shared/Navbar/Navbar';
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
     return (
         <div className='login-container'>
             <Navbar></Navbar>
