@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './SignUp.css'
 import google from '../Assets/logo/google.svg'
 import Navbar from '../Shared/Navbar/Navbar';
 import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import auth from '../../Firebase/firebase.init';
+import Loading from '../Loading/Loading';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user] = useAuthState(auth)
+    const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const [
         createUserWithEmailAndPassword,
         a,
         loading,
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
+
+      if(loading){
+          return <Loading></Loading>
+      }
 
     const handleEmail = e =>{
         setEmail(e.target.value)
@@ -27,12 +33,12 @@ const SignUp = () => {
 
     const createUser = () =>{
         createUserWithEmailAndPassword(email, password);
-        toast("Account created")
+        toast.success("Account created");
+        navigate('/')
     }
 
     const handleForm = e =>{
         e.preventDefault();
-        e.target.reset();
     }
 
     return (

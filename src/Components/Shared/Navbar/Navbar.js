@@ -1,8 +1,17 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import auth from '../../../Firebase/firebase.init';
 import './Navbar.css'
 
 const Navbar = () => {
+  const [user] = useAuthState(auth);
+
+  const handleSignOut = () =>{
+    signOut(auth);
+  }
     return (
         <div className=''>
             <nav className="navbar navbar-expand-lg navbar-light nav-custom-style">
@@ -16,7 +25,12 @@ const Navbar = () => {
         <NavLink to="/" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Home</NavLink>
         <NavLink to="/allinventory" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Inventory</NavLink>
         <NavLink to="/my-items" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>My Items</NavLink>
-        <NavLink to="/login" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>Login</NavLink>
+        {
+          user? 
+          <NavLink to="/login" onClick={handleSignOut} className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>SignOut</NavLink>
+          :
+          <NavLink to="/login" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>Login</NavLink>
+        }
         
       </div>
       

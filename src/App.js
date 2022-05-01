@@ -6,12 +6,20 @@ import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Inventory from './Components/Inventory/Inventory';
+import RequireAuth from './Components/RequireAuth/RequireAuth';
+import Loading from './Components/Loading/Loading';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
+        <Route path="/allinventory" element={
+          <RequireAuth>
+            <Inventory></Inventory>
+          </RequireAuth>
+        }></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
       </Routes>
