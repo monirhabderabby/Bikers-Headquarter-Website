@@ -1,18 +1,17 @@
-import { getAuth } from 'firebase/auth'
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAr-ph8_xpwH6TX2LFRWWhax6qB9QV8uRA",
-  authDomain: "bikers-headquarter.firebaseapp.com",
-  projectId: "bikers-headquarter",
-  storageBucket: "bikers-headquarter.appspot.com",
-  messagingSenderId: "743601891296",
-  appId: "1:743601891296:web:7e39b4301427fbf5516d85"
+  apiKey: "AIzaSyBcfVr8-cySbyeM4Q1lXE9xsGIN360gHik",
+  authDomain: "bikers-headquarter-assignment.firebaseapp.com",
+  projectId: "bikers-headquarter-assignment",
+  storageBucket: "bikers-headquarter-assignment.appspot.com",
+  messagingSenderId: "1004820881447",
+  appId: "1:1004820881447:web:6aacc4099774608c276e02"
 };
 
 // Initialize Firebase

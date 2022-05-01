@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import './SignUp.css'
-import google from '../Assets/logo/google.svg'
+import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import Navbar from '../Shared/Navbar/Navbar';
-import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { toast } from 'react-toastify';
+import google from '../Assets/logo/google.svg'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/firebase.init';
 import Loading from '../Loading/Loading';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user] = useAuthState(auth);
-    const navigate = useNavigate();
+    const [customError, setCustomError] = useState("");
+
     const [
         createUserWithEmailAndPassword,
-        a,
+        user,
         loading,
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
@@ -25,44 +24,51 @@ const SignUp = () => {
       }
 
     const handleEmail = e =>{
-        setEmail(e.target.value)
+        setEmail(e.target.value);
     }
     const handlePassword = e =>{
-        setPassword(e.target.value);
+        setPassword(e.target.value)
     }
-
-    const createUser = () =>{
-        createUserWithEmailAndPassword(email, password);
-        toast.success("Account created");
-        navigate('/')
-    }
-
     const handleForm = e =>{
         e.preventDefault();
+    }
+    const userLogin = () =>{
+        createUserWithEmailAndPassword(email, password);
+        if(user){
+            toast.success("account created")
+        }
     }
 
     return (
         <div className='login-container'>
             <Navbar></Navbar>
             <div className="login-form">
-                <form className='form' onSubmit={handleForm}>
+                <div className="form">
+                <form onSubmit={handleForm}>
                     <h1>SignUp</h1>
                     <div className='input-field'>
-                        <input type="email" name="email" onBlur={handleEmail} placeholder='Email' required/>
+                        <input onBlur={handleEmail} type="email" name="email" placeholder='Email' required/>
                     </div>
                     <div className='input-field'>
-                        <input type="password" name="password" onBlur={handlePassword} placeholder='Password' required/>
+                        <input onBlur={handlePassword} type="password" name="password" placeholder='Password' required/>
                     </div>
-                    <input type="submit" value="SIGNUP" className='login-btn' onClick={createUser} />
+                    <small className='reset-btn' >Reset Password</small> <br />
+                    <input onClick={userLogin} type="submit" value="LOGIN" className='login-btn'/>
                     <p>Already have an account? <Link to="/login" className='signup-btn'>Login</Link></p>
+
                     <p className='or'>------ or ------</p>
                     
-                    <div className='input-field'>
-                        <button className='google-btn'>
+                    
+                    
+                </form>
+                <div className='input-field'>
+                        <button className='google-btn' >
                             <img src={google} className="icon" alt='icon'></img>
                             Continue with Google</button>
                     </div>
-                </form>
+                    <ToastContainer />
+                </div>
+
                 
             </div>
         </div>

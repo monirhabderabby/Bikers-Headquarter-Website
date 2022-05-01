@@ -1,43 +1,105 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Login.css'
 import google from '../Assets/logo/google.svg'
+import './Login.css'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import auth from '../../Firebase/firebase.init'
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import Loading from '../Loading/Loading';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../Shared/Navbar/Navbar';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [customError, setCustomError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate()
+    
+    const [signInWithEmailAndPass, , loading1, ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [currentUser, loading] = useAuthState(auth)
 
+    if(loading1 || loading){
+        return <Loading></Loading>
+    }
 
+    let from = location.state?.from?.pathname || "/";
+
+    if(currentUser){
+        navigate(from, { replace: true });
+    }
+    const handleEmail = e => {
+        setEmail(e.target.value)
+    }
+    const handlePassword = e =>{
+        setPassword(e.target.value)
+    }
+    const handleConfirmPassword = e =>{
+        setConfirmPassword(e.target.value)
+    }
+    const handleForm = e =>{
+        e.preventDefault()
+    }
+
+    const handleSignInWithGoogle = () =>{
+        signInWithGoogle()
+    }
+    
+    const userLogin = () =>{
+        if(password !== confirmPassword){
+            setCustomError("Password didn't matched")
+        }
+        else{
+            setCustomError('')
+            signInWithEmailAndPass(email, password);
+        }
+    }
+
+    const handleResetPassword = () =>{
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            toast('email sent')
+          })
+          .catch((error) => {
+          });
+    }
+    
     return (
         <div className='login-container'>
             <Navbar></Navbar>
             <div className="login-form">
-                <form className='form'>
+                <div className="form">
+                <form onSubmit={handleForm}>
                     <h1>Login</h1>
                     <div className='input-field'>
-                        <input type="email" name="email" placeholder='Email' required/>
+                        <input onBlur={handleEmail} type="email" name="email" placeholder='Email' required/>
                     </div>
                     <div className='input-field'>
-                        <input type="password" name="password" placeholder='Password' required/>
+                        <input onBlur={handlePassword} type="password" name="password" placeholder='Password' required/>
                     </div>
                     <div className='input-field'>
-                        <input  type="password" name="ConfirmPassword" placeholder='Confirm Password' required/>
-                        <small className='text-danger'></small>
+                        <input onBlur={handleConfirmPassword} type="password" name="ConfirmPassword" placeholder='ConfirmPassword' required/>
+                        <small className='text-danger'>{customError}</small>
                     </div>
-                    <small className='reset-btn'>Reset Password</small> <br />
-                    <input type="submit" value="LOGIN" className='login-btn'/>
+                    <small className='reset-btn' onClick={handleResetPassword}>Reset Password</small> <br />
+                    <input onClick={userLogin} type="submit" value="LOGIN" className='login-btn'/>
                     <p>I am new? <Link to="/signup" className='signup-btn'>Create an Account</Link></p>
 
                     <p className='or'>------ or ------</p>
                     
-                    <div className='input-field'>
-                        <button className='google-btn'>
+                    
+                    
+                </form>
+                <div className='input-field'>
+                        <button className='google-btn' onClick={handleSignInWithGoogle}>
                             <img src={google} className="icon" alt='icon'></img>
                             Continue with Google</button>
                     </div>
-                    
-                </form>
+                    <ToastContainer />
+                </div>
 
                 
             </div>
