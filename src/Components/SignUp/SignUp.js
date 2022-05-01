@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignUp.css'
 import google from '../Assets/logo/google.svg'
 import Navbar from '../Shared/Navbar/Navbar';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import auth from '../../Firebase/firebase.init';
 
 const SignUp = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
     return (
         <div className='login-container'>
             <Navbar></Navbar>
