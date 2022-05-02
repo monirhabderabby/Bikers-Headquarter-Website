@@ -1,6 +1,6 @@
 import React from 'react';
 import './UpcomingBike.css'
-import bike from '../Assets/r15 v4.png'
+import bike from '../Assets/all-bikes-photo/r15 v4.png'
 
 const UpcomingBike = () => {
     return (
