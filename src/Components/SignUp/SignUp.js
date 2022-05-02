@@ -10,15 +10,15 @@ import Loading from '../Loading/Loading';
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [customError, setCustomError]=useState('')
     const location = useLocation();
 
     //Naviate
     const navigate = useNavigate();
 
-    const [
-        createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
       const [signInWithGoogle, user1, loading1] = useSignInWithGoogle(auth);
-    const [user, loading] = useAuthState(auth)
+    const [currentUser, loading] = useAuthState(auth)
 
       if(loading || loading1){
           return <Loading></Loading>
@@ -37,10 +37,16 @@ const SignUp = () => {
     }
     const handleForm = e =>{
         e.preventDefault();
-    }
-    const userLogin = () =>{
-        createUserWithEmailAndPassword(email, password);
-        toast.success("account created");
+        if(password.length <= 5 ){
+            toast.warning("password length should be at least 6");
+            e.target.password.value = "";
+            
+        }
+        else{
+            createUserWithEmailAndPassword(email, password);
+            toast.success("Successfully login!")
+        }
+        
     }
     const handleGoogleSignup = () => {
         signInWithGoogle();
@@ -59,8 +65,9 @@ const SignUp = () => {
                     </div>
                     <div className='input-field'>
                         <input onBlur={handlePassword} type="password" name="password" placeholder='Password' required/>
+                        <small className='text-danger'>{customError}</small>
                     </div>
-                    <input onClick={userLogin} type="submit" value="SIGNUP" className='login-btn'/>
+                    <input type="submit" value="SIGNUP" className='login-btn'/>
                     <p>Already have an account? <Link to="/login" className='signup-btn'>Login</Link></p>
 
                     <p className='or'>------ or ------</p>

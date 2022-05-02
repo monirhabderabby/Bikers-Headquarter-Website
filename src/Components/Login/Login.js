@@ -18,7 +18,7 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    const [signInWithEmailAndPass, , loading1, error ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPass, user2 , loading1, error ] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, user1] = useSignInWithGoogle(auth);
     const [user, loading] = useAuthState(auth)
 
@@ -28,7 +28,7 @@ const Login = () => {
     
     let from = location.state?.from?.pathname || "/";
 
-    if(user || user1){
+    if(user2 || user1){
         navigate(from)
     }
     const handleEmail = e => {
