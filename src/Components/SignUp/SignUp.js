@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Navbar from '../Shared/Navbar/Navbar';
 import google from '../Assets/logo/google.svg'
@@ -11,6 +11,9 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [customError, setCustomError] = useState("");
+
+    //Naviate
+    const navigate = useNavigate();
 
     const [
         createUserWithEmailAndPassword,
@@ -34,9 +37,8 @@ const SignUp = () => {
     }
     const userLogin = () =>{
         createUserWithEmailAndPassword(email, password);
-        if(user){
-            toast.success("account created")
-        }
+        toast.success("account created");
+        navigate('/');
     }
 
     return (

@@ -18,14 +18,14 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate()
     
-    const [signInWithEmailAndPass, , loading1, ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPass, , loading1, error ] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle] = useSignInWithGoogle(auth);
     const [currentUser, loading] = useAuthState(auth)
 
     if(loading1 || loading){
         return <Loading></Loading>
     }
-
+    
     let from = location.state?.from?.pathname || "/";
 
     if(currentUser){
@@ -56,6 +56,7 @@ const Login = () => {
             setCustomError('')
             signInWithEmailAndPass(email, password);
         }
+        console.log(error);
     }
 
     const handleResetPassword = () =>{
@@ -64,6 +65,11 @@ const Login = () => {
             toast('email sent')
           })
           .catch((error) => {
+              const errormessage = error.message;
+              const emailError = errormessage.includes("auth/missing-email");
+              if(emailError){
+                setCustomError("Please type your email in field!")
+              }
           });
     }
     
