@@ -10,7 +10,6 @@ import Loading from '../Loading/Loading';
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [customError, setCustomError] = useState("");
     const location = useLocation();
 
     //Naviate
