@@ -2,7 +2,6 @@ import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import auth from '../../../Firebase/firebase.init';
 import './Navbar.css'
 
@@ -24,7 +23,7 @@ const Navbar = () => {
       <div className="navbar-nav ms-auto mb-2 mb-lg-0">
         <NavLink to="/" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Home</NavLink>
         <NavLink to="/allinventory" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Inventory</NavLink>
-        <NavLink to="/my-items" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>My Items</NavLink>
+        <NavLink to="/myItems" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>My Items</NavLink>
         {
           user? 
           <NavLink to="/login" onClick={handleSignOut} className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>SignOut</NavLink>

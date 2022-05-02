@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Navbar from '../Shared/Navbar/Navbar';
 import google from '../Assets/logo/google.svg'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/firebase.init';
 import Loading from '../Loading/Loading';
 
@@ -11,19 +11,23 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [customError, setCustomError] = useState("");
+    const location = useLocation();
 
     //Naviate
     const navigate = useNavigate();
 
     const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-      ] = useCreateUserWithEmailAndPassword(auth);
+        createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+      const [signInWithGoogle, user1, loading1] = useSignInWithGoogle(auth);
+    const [user, loading] = useAuthState(auth)
 
-      if(loading){
+      if(loading || loading1){
           return <Loading></Loading>
+      }
+      let from = location.state?.from?.pathname || "/";
+
+      if(user || user1){
+          navigate(from)
       }
 
     const handleEmail = e =>{
@@ -38,7 +42,10 @@ const SignUp = () => {
     const userLogin = () =>{
         createUserWithEmailAndPassword(email, password);
         toast.success("account created");
-        navigate('/');
+    }
+    const handleGoogleSignup = () => {
+        signInWithGoogle();
+        toast.success("successfully login with Google!")
     }
 
     return (
@@ -54,8 +61,7 @@ const SignUp = () => {
                     <div className='input-field'>
                         <input onBlur={handlePassword} type="password" name="password" placeholder='Password' required/>
                     </div>
-                    <small className='reset-btn' >Reset Password</small> <br />
-                    <input onClick={userLogin} type="submit" value="LOGIN" className='login-btn'/>
+                    <input onClick={userLogin} type="submit" value="SIGNUP" className='login-btn'/>
                     <p>Already have an account? <Link to="/login" className='signup-btn'>Login</Link></p>
 
                     <p className='or'>------ or ------</p>
@@ -63,7 +69,7 @@ const SignUp = () => {
                     
                     
                 </form>
-                <div className='input-field'>
+                <div className='input-field' onClick={handleGoogleSignup}>
                         <button className='google-btn' >
                             <img src={google} className="icon" alt='icon'></img>
                             Continue with Google</button>

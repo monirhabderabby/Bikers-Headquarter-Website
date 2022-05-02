@@ -8,8 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Inventory from './Components/Inventory/Inventory';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
-import Loading from './Components/Loading/Loading';
-
+import MyPage from './Components/MyPage/MyPage';
 function App() {
   return (
     <div className="App">
@@ -21,6 +20,11 @@ function App() {
           </RequireAuth>
         }></Route>
         <Route path="/login" element={<Login></Login>}></Route>
+        <Route path='/myItems' element={
+          <RequireAuth>
+            <MyPage></MyPage>
+          </RequireAuth>
+        }></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
       </Routes>
       <ToastContainer/>

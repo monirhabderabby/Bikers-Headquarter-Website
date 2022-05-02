@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import google from '../Assets/logo/google.svg'
 import './Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -16,11 +16,11 @@ const Login = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [customError, setCustomError] = useState('');
     const location = useLocation();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     
     const [signInWithEmailAndPass, , loading1, error ] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle] = useSignInWithGoogle(auth);
-    const [currentUser, loading] = useAuthState(auth)
+    const [signInWithGoogle, user1] = useSignInWithGoogle(auth);
+    const [user, loading] = useAuthState(auth)
 
     if(loading1 || loading){
         return <Loading></Loading>
@@ -28,8 +28,8 @@ const Login = () => {
     
     let from = location.state?.from?.pathname || "/";
 
-    if(currentUser){
-        navigate(from, { replace: true });
+    if(user || user1){
+        navigate(from)
     }
     const handleEmail = e => {
         setEmail(e.target.value)
@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     const handleSignInWithGoogle = () =>{
-        signInWithGoogle()
+        signInWithGoogle();
     }
     
     const userLogin = () =>{
@@ -56,7 +56,7 @@ const Login = () => {
             setCustomError('')
             signInWithEmailAndPass(email, password);
         }
-        console.log(error);
+
     }
 
     const handleResetPassword = () =>{
