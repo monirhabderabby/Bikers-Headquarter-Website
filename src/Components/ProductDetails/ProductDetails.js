@@ -9,6 +9,21 @@ const ProductDetails = () => {
   const {imgLink, productName, productDescription, productPrice, quantity, supplier} = product;
   const { id } = useParams();
 
+  //handleDeliver
+  const deliverQuantity = () =>{
+    const updatedQuantity = parseInt(quantity) - 1;
+  const url = `http://localhost:8080/product/${id}`;
+  fetch(url, {
+      method: "PUT",
+      headers:{
+          "content-type": "application/json"
+      },
+      body: JSON.stringify({quantity : updatedQuantity})
+  }) 
+  .then(res=> res.json())
+  .then(data=> console.log(data))
+}
+
   useEffect(() => {
     const url = `http://localhost:8080/product/${id}`;
     fetch(url)
@@ -17,10 +32,7 @@ const ProductDetails = () => {
   }, [id]);
 
 
-  //handleDeliver
-  const deliverQuantity = () =>{
-      toast("Delivered!")
-  }
+  
   return (
     <div className="container w-100 mx-auto mt-5">
       <div className="card mb-3" >
