@@ -50,7 +50,7 @@ const MyPage = () => {
         e.preventDefault();
         const email = user.email;
         const product = ({email, productName, productPrice, imgLink, quantity, supplier, productDescription});
-        fetch('http://localhost:5000/addProduct', {
+        fetch('http://localhost:8080/addProduct', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -63,6 +63,19 @@ const MyPage = () => {
                 e.target.reset();
             }
         })
+
+        const handleDelete = id =>{
+            const url =`http://localhost:8080/product/${id}`
+            fetch(url, {
+                method: "DELETE"
+            })
+            .then(res=> res.json())
+            .then(data=> {
+                if(data.deletedCount > 0){
+                    
+                }
+            })
+        }
 
     }
     return (
@@ -114,7 +127,7 @@ const MyPage = () => {
                     </thead>
                     <tbody>
                         {
-                            allProducts.map(p=> <TableRow key={p._id} product={p}></TableRow>)
+                            allProducts.map(p=> <TableRow key={p._id} product={p} ></TableRow>)
                         }
                     </tbody>
                     </table>
