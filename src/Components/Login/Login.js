@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import google from '../Assets/logo/google.svg'
 import './Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
