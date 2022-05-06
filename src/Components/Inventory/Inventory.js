@@ -4,7 +4,6 @@ import Navbar from '../Shared/Navbar/Navbar';
 import v3 from '../Assets/all-bikes-photo/r15 v4.png'
 import repsol from '../Assets/all-bikes-photo/repsol.png'
 import gsxr from '../Assets/all-bikes-photo/gsxr.png'
-import ktm from '../Assets/all-bikes-photo/ktm.png'
 import ProductCard from '../ProductCard/ProductCard';
 import Footer from '../Shared/Footer/Footer';
 
