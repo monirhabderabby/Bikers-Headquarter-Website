@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Inventory.css'
 import Navbar from '../Shared/Navbar/Navbar';
 import v3 from '../Assets/all-bikes-photo/r15 v4.png'
 import repsol from '../Assets/all-bikes-photo/repsol.png'
 import gsxr from '../Assets/all-bikes-photo/gsxr.png'
-import gixerSf from '../Assets/all-bikes-photo/gixxer_sf.png'
+import ktm from '../Assets/all-bikes-photo/ktm.png'
+import ProductCard from '../ProductCard/ProductCard';
+import Footer from '../Shared/Footer/Footer';
 
 const Inventory = () => {
+    const [allProducts, setAllProducts] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:8080/allProducts')
+        .then(res=> res.json())
+        .then(data => setAllProducts(data))
+    }, [])
     return (
         <div>
             <Navbar></Navbar>
@@ -33,16 +41,25 @@ const Inventory = () => {
                 </div>
                 <div className="col-lg-3">
                     <div className='product-stock-card'>
-                        <img className='img-fluid' src={gixerSf} alt="" />
+                        <img className='img-fluid' src='https://purepng.com/public/uploads/large/purepng.com-ktm-rc-390motorcyclemotorbikebikevehiclehondaktm-981525161914plvyv.png' alt="img" />
                         <p><span>Stock: </span>120</p>
                     </div>
                 </div>
             </div>
             </section>
 
-            <section>
-                
+            <section className='mt-5 container mb-5'>
+                <h1 className='headers mb-5'>All Products</h1>
+
+                <div className='mt-5'>
+                    <div className="row g-lg-5 g-md-4 g-2">
+                        {
+                            allProducts.map(p=> <ProductCard key={p._id} product={p}></ProductCard>)
+                        }
+                    </div>
+                </div>
             </section>
+            <Footer></Footer>
         </div>
     );
 };

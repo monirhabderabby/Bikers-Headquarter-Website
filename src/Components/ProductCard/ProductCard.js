@@ -14,7 +14,12 @@ const ProductCard = ({product}) => {
                         <p><small>Supplier: <span>{supplier}</span></small></p>
                         <p>{productDescription.slice(0,70)+'...'}</p>
                         <h3>${productPrice / 80}</h3>
-                        <p>Stock: <span>{parseInt(quantity)}</span></p>
+                        {
+                            quantity < 1 ?
+                            <p>Sold Out</p>
+                            :
+                            <p>Stock: <span>{quantity}</span></p>
+                        }
                     </div>
                     <button class="update-btn" onClick={()=> navigate(`/productDetails/${_id}`)}>Update</button>
                 </div>
