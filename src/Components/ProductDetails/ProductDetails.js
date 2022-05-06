@@ -22,7 +22,25 @@ const ProductDetails = () => {
   }) 
   .then(res=> res.json())
   .then(data=> console.log(data))
+  window.location.reload();
 }
+
+//handleRestock
+  const handleRestock = () =>{
+    const inputStock = prompt("Type quantity you want to add!")
+    const url = `http://localhost:8080/restock/${id}`;
+    fetch(url, {
+        method: "PUT",
+        headers:{
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({quantity : inputStock})
+    }) 
+    .then(res=> res.json())
+    .then(data=> console.log(data))
+    window.location.reload();
+  }
+
 
   useEffect(() => {
     const url = `http://localhost:8080/product/${id}`;
@@ -48,11 +66,16 @@ const ProductDetails = () => {
                 {productDescription}
               </p>
               <p>Price: ${productPrice / 80}</p>
-              <p>Stock: {quantity}</p>
+              {
+                quantity < 1 ? 
+                <p>Sold Out</p>
+                :
+                <p>Stock: {quantity}</p>
+              }
               <p></p>
               <p className="card-text">
                 <button className="deliver-and-restock-btn" onClick={deliverQuantity}>Deliver</button>
-                <button className="deliver-and-restock-btn">ReStock</button>
+                <button className="deliver-and-restock-btn" onClick={handleRestock}>ReStock</button>
               </p>
             </div>
           </div>
