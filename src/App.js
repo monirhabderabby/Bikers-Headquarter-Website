@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import Inventory from './Components/Inventory/Inventory';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import MyPage from './Components/MyPage/MyPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
