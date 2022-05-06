@@ -10,6 +10,7 @@ import Inventory from './Components/Inventory/Inventory';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import MyPage from './Components/MyPage/MyPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProductDetails from './Components/ProductDetails/ProductDetails';
 function App() {
   return (
     <div className="App">
@@ -27,6 +28,7 @@ function App() {
           </RequireAuth>
         }></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
+        <Route path='/productDetails/:id' element={<ProductDetails></ProductDetails>}></Route>
       </Routes>
       <ToastContainer/>
     </div>

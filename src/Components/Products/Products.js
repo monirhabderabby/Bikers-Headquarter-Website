@@ -9,6 +9,8 @@ const Products = () => {
         .then(res=> res.json())
         .then(data=> setProducts(data))
     }, [])
+
+    
     return (
         <div className='container'>
             <h1 className='mt-5 mb-lg-2'>Top 6 Products</h1>

@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProductCard.css'
 
 const ProductCard = ({product}) => {
-    console.log(product);
-    const {productName, imgLink, productPrice, productDescription, supplier, quantity} = product;
+    const navigate = useNavigate();
+    const {productName, imgLink, productPrice, productDescription, supplier, quantity, _id} = product;
     return (
         <div className='col-lg-4'>
             <div class="content">
@@ -15,7 +16,7 @@ const ProductCard = ({product}) => {
                         <h3>${productPrice / 80}</h3>
                         <p>Stock: <span>{parseInt(quantity)}</span></p>
                     </div>
-                    <button class="update-btn">Update</button>
+                    <button class="update-btn" onClick={()=> navigate(`/productDetails/${_id}`)}>Update</button>
                 </div>
         </div>
     );
