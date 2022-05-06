@@ -30,7 +30,8 @@ const MyPage = () => {
         setQuantity(e.target.value)
     }
     const handleSupplier = e =>{
-        setSupplier(e.target.value)
+        const inputData = e.target.value;
+        setSupplier(inputData.toLowerCase())
     }
     const handleDescription = e =>{
         setProductDescription(e.target.value);
