@@ -11,6 +11,7 @@ import RequireAuth from './Components/RequireAuth/RequireAuth';
 import MyPage from './Components/MyPage/MyPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
+import AddProduct from './Components/AddProduct/AddProduct';
 function App() {
   return (
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
         }></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path='/productDetails/:id' element={<ProductDetails></ProductDetails>}></Route>
+        <Route path="/addproduct" element={<AddProduct></AddProduct>}></Route>
       </Routes>
       <ToastContainer/>
     </div>

@@ -23,6 +23,12 @@ const Navbar = () => {
       <div className="navbar-nav ms-auto mb-2 mb-lg-0">
         <NavLink to="/" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Home</NavLink>
         <NavLink to="/allinventory" className={({ isActive }) => (isActive ? "active-link link" : "unactive-link")}>Inventory</NavLink>
+        {
+          user? 
+          <NavLink to="/addproduct" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>Add Product</NavLink>
+          :
+          <></>
+        }
         <NavLink to="/myItems" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>My Items</NavLink>
         {
           user? 
@@ -30,6 +36,8 @@ const Navbar = () => {
           :
           <NavLink to="/login" className={({ isActive }) => (isActive ? "active-link" : "unactive-link")}>Login</NavLink>
         }
+        
+        
         
       </div>
       

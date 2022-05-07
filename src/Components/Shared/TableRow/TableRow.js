@@ -3,19 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import './TableRow.css'
 
 const TableRow = ({product}) => {
-    const {productName, imgLink, productPrice, productDescription, supplier, quantity, _id} = product;
+    const {productName, imgLink, productPrice, quantity, _id} = product;
     const navigate = useNavigate();
 
 
     const handleDelete =  id =>{
-        const url =`https://morning-plains-88163.herokuapp.com/product/${id}`
+        const proceed = window.confirm("Are you sure want to delete this Favourite Product?");
+        if(proceed){
+            const url =`https://morning-plains-88163.herokuapp.com/product/${id}`
         fetch(url, {
             method: "DELETE"
         })
         .then(res=> res.json())
         .then(data=> {
-            window.location.reload();
+            navigate('/')
         })
+        }
+        return;
+        
         
         
     }
