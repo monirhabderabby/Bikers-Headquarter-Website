@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 import './Products.css'
 
 const Products = () => {
+    const navigate = useNavigate()
     const [Products, setProducts] = useState([]);
     useEffect(() => {
         fetch('https://morning-plains-88163.herokuapp.com/allProducts')
@@ -20,6 +22,7 @@ const Products = () => {
                         Products.slice(0,6).map(p=> <ProductCard key={p._id} product={p}></ProductCard>)
                     }
                 </div>
+                <button className='btn btn-outline-secondary mt-lg-5 mt-mb-3' onClick={()=>navigate('/allinventory')}>Manage Inventories</button>
             </div>
         </div>
     );
