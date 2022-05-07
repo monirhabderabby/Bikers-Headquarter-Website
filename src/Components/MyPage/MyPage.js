@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../Firebase/firebase.init';
 import Navbar from '../Shared/Navbar/Navbar';
 import TableRow from '../Shared/TableRow/TableRow';
@@ -19,7 +21,7 @@ const MyPage = () => {
     const [allProducts, setAllProducts] =  useState([]);
     useEffect(() => {
         const email = user.email;
-        const url = `http://localhost:8080/allproductsByEmail/${email}`;
+        const url = `https://morning-plains-88163.herokuapp.com/allproductsByEmail/${email}`;
         fetch(url)
         .then(res=> res.json())
         .then(data=> setAllProducts(data))
@@ -50,7 +52,7 @@ const MyPage = () => {
         e.preventDefault();
         const email = user.email;
         const product = ({email, productName, productPrice, imgLink, quantity, supplier, productDescription});
-        fetch('http://localhost:8080/addProduct', {
+        fetch('https://morning-plains-88163.herokuapp.com/addProduct', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -61,11 +63,13 @@ const MyPage = () => {
         .then(data=> {
             if(data.acknowledged === true){
                 e.target.reset();
+                toast("Product Added")
+                
             }
         })
 
         const handleDelete = id =>{
-            const url =`http://localhost:8080/product/${id}`
+            const url =`https://morning-plains-88163.herokuapp.com/product/${id}`
             fetch(url, {
                 method: "DELETE"
             })

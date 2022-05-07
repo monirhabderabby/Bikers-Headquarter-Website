@@ -8,7 +8,7 @@ const StockUpdate = () => {
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState(1200);
     useEffect(() => {
-        fetch('http://localhost:8080/allProducts')
+        fetch('https://morning-plains-88163.herokuapp.com/allProducts')
         .then(res=> res.json())
         .then(data => {
             setProducts(data);

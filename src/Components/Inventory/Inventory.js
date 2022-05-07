@@ -10,7 +10,7 @@ import Footer from '../Shared/Footer/Footer';
 const Inventory = () => {
     const [allProducts, setAllProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:8080/allProducts')
+        fetch('https://morning-plains-88163.herokuapp.com/allProducts')
         .then(res=> res.json())
         .then(data => setAllProducts(data))
     }, [])

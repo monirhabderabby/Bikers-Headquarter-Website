@@ -12,7 +12,7 @@ const ProductDetails = () => {
   //handleDeliver
   const deliverQuantity = () =>{
     const updatedQuantity = parseInt(quantity) - 1;
-  const url = `http://localhost:8080/product/${id}`;
+  const url = `https://morning-plains-88163.herokuapp.com/product/${id}`;
   fetch(url, {
       method: "PUT",
       headers:{
@@ -28,7 +28,7 @@ const ProductDetails = () => {
 //handleRestock
   const handleRestock = () =>{
     const inputStock = prompt("Type quantity you want to add!")
-    const url = `http://localhost:8080/restock/${id}`;
+    const url = `https://morning-plains-88163.herokuapp.com/restock/${id}`;
     fetch(url, {
         method: "PUT",
         headers:{
@@ -43,7 +43,7 @@ const ProductDetails = () => {
 
 
   useEffect(() => {
-    const url = `http://localhost:8080/product/${id}`;
+    const url = `https://morning-plains-88163.herokuapp.com/product/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setProduct(data));

@@ -8,13 +8,16 @@ const TableRow = ({product}) => {
 
 
     const handleDelete =  id =>{
-        const url =`http://localhost:8080/product/${id}`
+        const url =`https://morning-plains-88163.herokuapp.com/product/${id}`
         fetch(url, {
             method: "DELETE"
         })
         .then(res=> res.json())
-        .then(data=> console.log(data))
-        window.location.reload();
+        .then(data=> {
+            window.location.reload();
+        })
+        
+        
     }
     return (
         <tr>
