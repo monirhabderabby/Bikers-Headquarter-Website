@@ -23,12 +23,12 @@ const ProductDetails = () => {
   .then(res=> res.json())
   .then(data=> console.log(data))
   window.location.reload();
-}
+} 
 
-//handleRestock
-  const handleRestock = () =>{
-    const inputStock = prompt("Type quantity you want to add!")
-    const url = `https://morning-plains-88163.herokuapp.com/restock/${id}`;
+//handleRestockForm
+const handleRestockForm = e =>{
+  const inputStock = e.target.restockNumber.value;
+  const url = `https://morning-plains-88163.herokuapp.com/restock/${id}`;
     fetch(url, {
         method: "PUT",
         headers:{
@@ -39,7 +39,8 @@ const ProductDetails = () => {
     .then(res=> res.json())
     .then(data=> console.log(data))
     window.location.reload();
-  }
+}
+
 
 
   useEffect(() => {
@@ -75,7 +76,10 @@ const ProductDetails = () => {
               <p></p>
               <p className="card-text">
                 <button className="deliver-and-restock-btn" onClick={deliverQuantity}>Deliver</button>
-                <button className="deliver-and-restock-btn" onClick={handleRestock}>ReStock</button>
+                <form onSubmit={handleRestockForm}>
+                  <input type="number" name="restockNumber" className="restock-field" placeholder="type quantity"/>
+                  <input type="submit" value="Restock" className="deliver-and-restock-btn" />
+                </form>
               </p>
             </div>
           </div>
