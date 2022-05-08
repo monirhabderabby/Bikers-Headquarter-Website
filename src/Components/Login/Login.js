@@ -9,6 +9,8 @@ import Loading from '../Loading/Loading';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../Shared/Navbar/Navbar';
+import axios from 'axios';
+import { async } from '@firebase/util';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -18,19 +20,21 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    const [signInWithEmailAndPass, user2 , loading1, error ] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle, user1] = useSignInWithGoogle(auth);
+    const [signInWithEmailAndPass, user1 , loading1, error ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, user2, loading2] = useSignInWithGoogle(auth);
     const [user, loading] = useAuthState(auth)
 
-    if(loading1 || loading){
+    if(loading1 || loading2 || loading){
         return <Loading></Loading>
     }
     
     let from = location.state?.from?.pathname || "/";
 
-    if(user2 || user1){
-        navigate(from)
-    }
+    // if(user2 || user1){
+    //     // navigate(from)
+    // }
+
+
     const handleEmail = e => {
         setEmail(e.target.value)
     }
@@ -44,17 +48,24 @@ const Login = () => {
         e.preventDefault()
     }
 
-    const handleSignInWithGoogle = () =>{
-        signInWithGoogle();
+    const handleSignInWithGoogle = async() =>{
+       await signInWithGoogle();
+       const {data} = await axios.post('https://morning-plains-88163.herokuapp.com/login', user2.user.email)
+            localStorage.setItem("accesstoken", data.accessToken)
+            navigate(from, {replace:true})
+
     }
     
-    const userLogin = () =>{
+    const userLogin = async() =>{
         if(password !== confirmPassword){
             setCustomError("Password didn't matched")
         }
         else{
             setCustomError('')
-            signInWithEmailAndPass(email, password);
+            await signInWithEmailAndPass(email, password);
+            const {data} = await axios.post('https://morning-plains-88163.herokuapp.com/login', email)
+            localStorage.setItem("accesstoken", data.accessToken)
+            navigate(from, {replace:true})
         }
 
     }
