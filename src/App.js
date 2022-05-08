@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
 import AddProduct from './Components/AddProduct/AddProduct';
 import NoPageFound from './Components/Shared/NoPageFound/NoPageFound';
+import Blog from './Components/Blog/Blog';
 function App() {
   return (
     <div className="App">
@@ -33,6 +34,7 @@ function App() {
         <Route path='/productDetails/:id' element={<ProductDetails></ProductDetails>}></Route>
         <Route path="/addproduct" element={<AddProduct></AddProduct>}></Route>
         <Route path='*' element={<NoPageFound></NoPageFound>}></Route>
+        <Route path='/blog' element={<Blog></Blog>}></Route>
       </Routes>
       <ToastContainer/>
     </div>
