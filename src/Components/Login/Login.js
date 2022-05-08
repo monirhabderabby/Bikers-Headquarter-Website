@@ -4,13 +4,12 @@ import './Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import auth from '../../Firebase/firebase.init'
-import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import Loading from '../Loading/Loading';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from '../Shared/Navbar/Navbar';
 import axios from 'axios';
-import { async } from '@firebase/util';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -20,20 +19,14 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    const [signInWithEmailAndPass, user1 , loading1, error ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPass,  , loading1, error ] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, user2, loading2] = useSignInWithGoogle(auth);
-    const [user, loading] = useAuthState(auth)
 
-    if(loading1 || loading2 || loading){
+    if(loading1 || loading2 ){
         return <Loading></Loading>
     }
     
     let from = location.state?.from?.pathname || "/";
-
-    // if(user2 || user1){
-    //     // navigate(from)
-    // }
-
 
     const handleEmail = e => {
         setEmail(e.target.value)
@@ -50,7 +43,8 @@ const Login = () => {
 
     const handleSignInWithGoogle = async() =>{
        await signInWithGoogle();
-       const {data} = await axios.post('https://morning-plains-88163.herokuapp.com/login', user2.user.email)
+       const userEmail = (user2.user.email)
+       const {data} = await axios.post('https://morning-plains-88163.herokuapp.com/login', userEmail)
             localStorage.setItem("accesstoken", data.accessToken)
             navigate(from, {replace:true})
 
