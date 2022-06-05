@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import Loading from "../Loading/Loading";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
-  const [product, setProduct] = useState({});
-
-  const {imgLink, productName, productDescription, productPrice, quantity, supplier} = product;
   const { id } = useParams();
+  const {data:p, isLoading} = useQuery("singleProduct", ()=> fetch(`https://morning-plains-88163.herokuapp.com/product/${id}`).then(res=> res.json()))
+
+  
 
   //handleDeliver
   const deliverQuantity = () =>{
-    const updatedQuantity = parseInt(quantity) - 1;
+    const updatedQuantity = parseInt(p?.quantity) - 1;
   const url = `https://morning-plains-88163.herokuapp.com/product/${id}`;
   fetch(url, {
       method: "PUT",
@@ -42,13 +42,9 @@ const handleRestockForm = e =>{
 }
 
 
-
-  useEffect(() => {
-    const url = `https://morning-plains-88163.herokuapp.com/product/${id}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setProduct(data));
-  }, [id]);
+  if(isLoading){
+    return <Loading></Loading>
+  }
 
 
   
@@ -57,21 +53,21 @@ const handleRestockForm = e =>{
       <div className="card mb-3" >
         <div className="row g-0">
           <div className="col-md-4">
-            <img src={imgLink} className="img-fluid rounded-start" alt="..." />
+            <img src={p?.imgLink} className="img-fluid rounded-start" alt="..." />
           </div>
           <div className="col-md-8">
             <div className="card-body text-start px-5">
-              <h3 className="card-title">{productName}</h3>
-              <small><span className="fw-bold">supplier: </span> {supplier}</small>
+              <h3 className="card-title">{p.productName}</h3>
+              <small><span className="fw-bold">supplier: </span> {p.supplier}</small>
               <p className="card-text">
-                {productDescription}
+                {p.productDescription}
               </p>
-              <p>Price: ${productPrice / 80}</p>
+              <p>Price: ${p.productPrice / 80}</p>
               {
-                quantity < 1 ? 
+                p.quantity < 1 ? 
                 <p>Sold Out</p>
                 :
-                <p>Stock: {quantity}</p>
+                <p>Stock: {p.quantity}</p>
               }
               <p></p>
               <p className="card-text">
