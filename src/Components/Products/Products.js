@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 import ProductCard from '../ProductCard/ProductCard';
 import './Products.css'
 
 const Products = () => {
     const navigate = useNavigate()
-    const [Products, setProducts] = useState([]);
-    useEffect(() => {
-        fetch('https://morning-plains-88163.herokuapp.com/allProducts')
-        .then(res=> res.json())
-        .then(data=> setProducts(data))
-    }, [])
+
+    const {data, refetch, isLoading}= useQuery("products",()=> fetch('https://morning-plains-88163.herokuapp.com/allProducts').then(res=> res.json()))
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
     
     return (
@@ -19,7 +19,7 @@ const Products = () => {
             <div className='mb-5'>
                 <div className="row mt-3 g-5">
                     {
-                        Products.slice(0,6).map(p=> <ProductCard key={p._id} product={p}></ProductCard>)
+                        data.slice(0,6).map(p=> <ProductCard key={p._id} product={p}></ProductCard>)
                     }
                 </div>
                 <button className='btn btn-outline-secondary mt-lg-5 mt-mb-3' onClick={()=>navigate('/allinventory')}>Manage Inventories</button>
