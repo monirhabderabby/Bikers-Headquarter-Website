@@ -5,7 +5,7 @@ import "./ProductDetails.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const {data:p, isLoading} = useQuery("singleProduct", ()=> fetch(`https://morning-plains-88163.herokuapp.com/product/${id}`).then(res=> res.json()))
+  const {data:p, isLoading, refetch} = useQuery("singleProduct", ()=> fetch(`https://morning-plains-88163.herokuapp.com/product/${id}`).then(res=> res.json()))
 
   
 
@@ -22,23 +22,31 @@ const ProductDetails = () => {
   }) 
   .then(res=> res.json())
   .then(data=> console.log(data))
-  window.location.reload();
+  refetch()
 } 
 
 //handleRestockForm
 const handleRestockForm = e =>{
+  e.preventDefault()
   const inputStock = e.target.restockNumber.value;
+  const oldQuantity  = p.quantity;
+  const newQuantity = parseInt(oldQuantity)+parseInt(inputStock);
   const url = `https://morning-plains-88163.herokuapp.com/restock/${id}`;
     fetch(url, {
         method: "PUT",
         headers:{
             "content-type": "application/json"
         },
-        body: JSON.stringify({quantity : inputStock})
+        body: JSON.stringify({quantity : newQuantity})
     }) 
     .then(res=> res.json())
-    .then(data=> console.log(data))
-    window.location.reload();
+    .then(data=> {
+      if(data.modifiedCount > 0){
+        e.target.restockNumber.value = "";
+        refetch()
+      }
+    })
+    
 }
 
 
