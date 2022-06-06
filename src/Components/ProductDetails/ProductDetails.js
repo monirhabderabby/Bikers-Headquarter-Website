@@ -21,8 +21,12 @@ const ProductDetails = () => {
       body: JSON.stringify({quantity : updatedQuantity})
   }) 
   .then(res=> res.json())
-  .then(data=> console.log(data))
-  refetch()
+  .then(data=> {
+    if(data.modifiedCount > 0){
+      refetch()
+    }
+  })
+  
 } 
 
 //handleRestockForm
