@@ -14,6 +14,8 @@ import ProductDetails from './Components/ProductDetails/ProductDetails';
 import AddProduct from './Components/AddProduct/AddProduct';
 import NoPageFound from './Components/Shared/NoPageFound/NoPageFound';
 import Blog from './Components/Blog/Blog';
+import 'aos/dist/aos.css';
+
 function App() {
   return (
     <div className="App">

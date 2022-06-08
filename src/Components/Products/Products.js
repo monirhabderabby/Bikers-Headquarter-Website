@@ -22,7 +22,7 @@ const Products = () => {
                         data.slice(0,6).map(p=> <ProductCard key={p._id} product={p}></ProductCard>)
                     }
                 </div>
-                <button className='btn btn-outline-secondary mt-lg-5 mt-mb-3' onClick={()=>navigate('/allinventory')}>Manage Inventories</button>
+                <button className='btn btn-outline-secondary mt-5' onClick={()=>navigate('/allinventory')}>Manage Inventories</button>
             </div>
         </div>
     );

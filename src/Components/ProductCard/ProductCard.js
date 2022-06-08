@@ -6,7 +6,7 @@ const ProductCard = ({product}) => {
     const navigate = useNavigate();
     const {productName, imgLink, productPrice, productDescription, supplier, quantity, _id} = product;
     return (
-        <div className='col-lg-4'>
+        <div className='col-lg-4' data-aos="zoom-in" data-aos-duration="1000">
             <div class="content">
                     <img src={imgLink} alt="imgage" class="card-img"/>
                     <div className='content-body'>
