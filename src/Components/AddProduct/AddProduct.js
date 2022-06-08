@@ -37,7 +37,7 @@ const AddProduct = () => {
         e.preventDefault();
         const email = user.email;
         const product = ({email, productName, productPrice, imgLink, quantity, supplier, productDescription});
-        fetch('https://morning-plains-88163.herokuapp.com/addProduct', {
+        fetch('https://hidden-thicket-51084.herokuapp.com/addProduct', {
             method: "POST",
             headers: {
                 "content-type": "application/json"

@@ -12,7 +12,7 @@ const MyPage = () => {
     const [allProducts, setAllProducts] =  useState([]);
     useEffect(() => {
         const email = user.email;
-        const url = `https://morning-plains-88163.herokuapp.com/allproductsByEmail/${email}`;
+        const url = `https://hidden-thicket-51084.herokuapp.com/allproductsByEmail/${email}`;
         fetch(url)
         .then(res=> res.json())
         .then(data=> setAllProducts(data))

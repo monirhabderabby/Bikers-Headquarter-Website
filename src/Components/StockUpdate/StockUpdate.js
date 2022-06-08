@@ -7,22 +7,10 @@ import { useQuery } from 'react-query';
 import Loading from '../Loading/Loading';
 
 const StockUpdate = () => {
-    const [products, setProducts] = useState([]);
-    const [quantity, setQuantity] = useState(1200);
-    useEffect(() => {
-        fetch('https://morning-plains-88163.herokuapp.com/allProducts')
-        .then(res=> res.json())
-        .then(data => {
-            setProducts(data);
-        })
-    }, []);
 
-    const {data, isLoading} = useQuery("status", ()=> fetch("http://localhost:5000/totalProduct").then(res=> res.json()))
+    const {data, isLoading} = useQuery("status", ()=> fetch("https://hidden-thicket-51084.herokuapp.com/totalProduct").then(res=> res.json()))
     if(isLoading){
         return <Loading />
-    }
-    if(data){
-        console.log(data[0].totalSales);
     }
 
     return (
@@ -35,11 +23,11 @@ const StockUpdate = () => {
                 </div>
                 <div className="col-lg-4 stock-card">
                 <FontAwesomeIcon className='stock-icon' icon={faWarehouse} />
-                <h3>${data?.[0].totalSales}+</h3>
+                <h3>35+</h3>
                 </div>
                 <div className="col-lg-4 stock-card">
                 <FontAwesomeIcon className='stock-icon' icon={faCircleDollarToSlot} />
-                <h3>120,00</h3>
+                <h3>${data?.[0].totalSales}+</h3>
                 </div>
             </div>
         </div>

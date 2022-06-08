@@ -44,7 +44,7 @@ const Login = () => {
     const handleSignInWithGoogle = async() =>{
        await signInWithGoogle();
        const userEmail = (user2.user.email)
-       const {data} = await axios.post('https://morning-plains-88163.herokuapp.com/login', userEmail)
+       const {data} = await axios.post('https://hidden-thicket-51084.herokuapp.com/login', userEmail)
             localStorage.setItem("accesstoken", data.accessToken)
             navigate(from, {replace:true})
 
@@ -57,7 +57,7 @@ const Login = () => {
         else{
             setCustomError('')
             await signInWithEmailAndPass(email, password);
-            const {data} = await axios.post('https://morning-plains-88163.herokuapp.com/login', email)
+            const {data} = await axios.post('https://hidden-thicket-51084.herokuapp.com/login', email)
             localStorage.setItem("accesstoken", data.accessToken)
             navigate(from, {replace:true})
         }

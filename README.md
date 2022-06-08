@@ -16,7 +16,7 @@ A Full Stack Inventory management Website
 
 ## Server Side
 
-* Server Link [Open](https://morning-plains-88163.herokuapp.com/)
+* Server Link [Open](https://hidden-thicket-51084.herokuapp.com/)
 * Repository Link [Open](https://github.com/ProgrammingHeroWC4/warehouse-management-server-side-monirhabderabby)
 
 ### Technologies used for server side

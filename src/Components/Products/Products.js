@@ -7,7 +7,7 @@ import './Products.css'
 const Products = () => {
     const navigate = useNavigate()
 
-    const {data, refetch, isLoading}= useQuery("products",()=> fetch('https://morning-plains-88163.herokuapp.com/allProducts').then(res=> res.json()))
+    const {data, refetch, isLoading}= useQuery("products",()=> fetch('https://hidden-thicket-51084.herokuapp.com/allProducts').then(res=> res.json()))
     if(isLoading){
         return <Loading></Loading>
     }

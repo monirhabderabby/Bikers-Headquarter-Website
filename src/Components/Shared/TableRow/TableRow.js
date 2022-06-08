@@ -10,7 +10,7 @@ const TableRow = ({product}) => {
     const handleDelete =  id =>{
         const proceed = window.confirm("Are you sure want to delete this Favourite Product?");
         if(proceed){
-            const url =`https://morning-plains-88163.herokuapp.com/product/${id}`
+            const url =`https://hidden-thicket-51084.herokuapp.com/product/${id}`
         fetch(url, {
             method: "DELETE"
         })

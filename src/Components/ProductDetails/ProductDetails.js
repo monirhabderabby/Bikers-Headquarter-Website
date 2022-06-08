@@ -5,14 +5,14 @@ import "./ProductDetails.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const {data:p, isLoading, refetch} = useQuery("singleProduct", ()=> fetch(`https://morning-plains-88163.herokuapp.com/product/${id}`).then(res=> res.json()))
+  const {data:p, isLoading, refetch} = useQuery("singleProduct", ()=> fetch(`https://hidden-thicket-51084.herokuapp.com/product/${id}`).then(res=> res.json()))
 
   
 
   //handleDeliver
   const deliverQuantity = () =>{
     const updatedQuantity = parseInt(p?.quantity) - 1;
-  const url = `https://morning-plains-88163.herokuapp.com/product/${id}`;
+  const url = `https://hidden-thicket-51084.herokuapp.com/product/${id}`;
   fetch(url, {
       method: "PUT",
       headers:{
@@ -35,7 +35,7 @@ const handleRestockForm = e =>{
   const inputStock = e.target.restockNumber.value;
   const oldQuantity  = p.quantity;
   const newQuantity = parseInt(oldQuantity)+parseInt(inputStock);
-  const url = `https://morning-plains-88163.herokuapp.com/restock/${id}`;
+  const url = `https://hidden-thicket-51084.herokuapp.com/restock/${id}`;
     fetch(url, {
         method: "PUT",
         headers:{
